@@ -17,9 +17,8 @@ function stripLocale(pathname: string) {
  * z.B. LOGO_NUDGE_X = "translate-x-[1px]" oder "-translate-x-[1px]"
  *      LOGO_NUDGE_Y = "translate-y-[1px]" oder "-translate-y-[1px]"
  */
-const LOGO_NUDGE_X = ""; // z.B. "translate-x-[1px]"
-const LOGO_NUDGE_Y = ""; // z.B. "-translate-y-[1px]"
-
+const LOGO_NUDGE_X = "translate-x-[1px]";
+const LOGO_NUDGE_Y = "translate-y-[1px]";
 function LogoCircle({ size }: { size: "mobile" | "desktop" }) {
   const outer = size === "mobile" ? "h-14 w-14" : "h-14 w-14"; // Desktop auch 48px, kannst du auf h-14 w-14 erhöhen
   const inner = size === "mobile" ? "h-12 w-12" : "h-12 w-12"; // Innenfläche fürs Logo
