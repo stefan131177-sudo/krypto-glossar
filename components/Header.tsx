@@ -1,134 +1,158 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useMemo, useState } from "react";
+import {usePathname} from "next/navigation";
+import {useEffect, useState} from "react";
+import {useTranslations} from "next-intl";
 import LanguageSwitch from "./LanguageSwitch";
 
-const TELEGRAM_URL = "https://t.me/MindsetCashflowNetworkmarketing";
-
-function getLocaleFromPath(pathname: string) {
-  const seg = pathname.split("/")[1];
-  if (seg === "en" || seg === "de") return seg as "en" | "de";
-  return "de"; // default
-}
-
-function withLocale(locale: "de" | "en", href: string) {
-  // Wenn du localePrefix: "as-needed" nutzt, ist "de" ohne Prefix ok.
-  // Aber du verwendest auch /de/... — beides ist möglich.
-  // Wir halten es simpel: EN immer prefix, DE ohne prefix.
-  if (locale === "en") return `/en${href}`;
-  return href; // "/quiz" statt "/de/quiz"
-}
-
 export default function Header() {
-  const pathname = usePathname() || "/";
-  const locale = useMemo(() => getLocaleFromPath(pathname), [pathname]);
+  const t = useTranslations("nav");
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
-  const navLinks = [
-    { href: "/glossary", label: "Glossar" },
-    { href: "/quiz", label: "Quiz" },
-    { href: "/disclaimer", label: "Disclaimer" },
-    { href: "/datenschutz", label: "Datenschutz" },
-    { href: "/impressum", label: "Impressum" }
-  ];
+  // Menü schließen, wenn Route wechselt (nach Klick)
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-black/40 backdrop-blur">
-      <div className="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between gap-3">
+    <header className="sticky top-0 z-30 -mx-4 px-4 py-3">
+      <div className="glass-strong mx-auto flex h-14 max-w-6xl items-center justify-between rounded-2xl px-4">
         {/* Brand */}
-        <Link
-          href={withLocale(locale, "/")}
-          className="flex items-center gap-2 font-bold text-zinc-100"
-        >
-          <span className="truncate">Krypto Glossar</span>
+        <Link href="./" className="flex items-center gap-3">
+          <Image
+            src="/mcn-logo.png"
+            alt="MCN Logo"
+            width={40}
+            height={40}
+            className="rounded-full ring-1 ring-orange-500/30 shadow-lg shadow-orange-500/20"
+            priority
+          />
+          <div className="leading-tight">
+            <div className="text-xs text-zinc-400">Mindset Cashflow</div>
+            <div className="text-base font-semibold tracking-tight sm:text-lg">
+              Krypto Glossar
+            </div>
+          </div>
         </Link>
 
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-6 text-sm text-zinc-300">
-          <Link className="hover:text-zinc-100" href={withLocale(locale, "/glossary")}>
-            Glossar
+        {/* Desktop Nav (wie original) */}
+        <nav className="hidden items-center gap-5 md:flex">
+          <Link className="text-sm text-zinc-200 hover:text-orange-400" href="./glossary">
+            {t("glossary")}
           </Link>
-          <Link className="hover:text-zinc-100" href={withLocale(locale, "/quiz")}>
-            Quiz
+          <Link className="text-sm text-zinc-200 hover:text-orange-400" href="./quiz">
+            {t("quiz")}
           </Link>
-
-          {/* Telegram Button (Desktop) */}
           <a
-            href={TELEGRAM_URL}
+            className="text-sm text-zinc-200 hover:text-orange-400"
+            href="https://t.me/MindsetCashflowNetworkmarketing"
             target="_blank"
             rel="noreferrer"
-            className="rounded-full border border-orange-500/40 bg-orange-500/10 px-3 py-1.5 text-orange-200 hover:bg-orange-500/15"
           >
-            Telegram
+            {t("telegram")}
           </a>
-
-          <Link className="hover:text-zinc-100" href={withLocale(locale, "/disclaimer")}>
-            Disclaimer
+          <Link className="text-sm text-zinc-400 hover:text-zinc-200" href="./disclaimer">
+            {t("disclaimer")}
           </Link>
-          <Link className="hover:text-zinc-100" href={withLocale(locale, "/datenschutz")}>
-            Datenschutz
+          <Link className="text-sm text-zinc-400 hover:text-zinc-200" href="./datenschutz">
+            {t("privacy")}
           </Link>
-          <Link className="hover:text-zinc-100" href={withLocale(locale, "/impressum")}>
-            Impressum
+          <Link className="text-sm text-zinc-400 hover:text-zinc-200" href="./impressum">
+            {t("imprint")}
           </Link>
-
-          <LanguageSwitch />
         </nav>
 
-        {/* Mobile Right Controls (Telegram + Language + Burger) */}
-        <div className="md:hidden flex items-center gap-2">
-          {/* Telegram bleibt IMMER sichtbar */}
+        {/* Right Controls */}
+        <div className="flex items-center gap-2 sm:gap-3">
+          {/* Telegram Button: auch auf Mobile sichtbar */}
           <a
-            href={TELEGRAM_URL}
+            className="btn-ghost hidden sm:inline-flex"
+            href="https://t.me/MindsetCashflowNetworkmarketing"
             target="_blank"
             rel="noreferrer"
-            className="rounded-full border border-orange-500/40 bg-orange-500/10 px-3 py-1.5 text-xs font-semibold text-orange-200"
+          >
+            {t("joinTelegram")}
+          </a>
+
+          {/* Mobile: kleiner Telegram Button immer sichtbar */}
+          <a
+            className="sm:hidden rounded-2xl border border-orange-500/40 bg-orange-500/10 px-3 py-2 text-xs font-semibold text-orange-200 hover:bg-orange-500/15"
+            href="https://t.me/MindsetCashflowNetworkmarketing"
+            target="_blank"
+            rel="noreferrer"
           >
             Telegram
           </a>
 
           <LanguageSwitch />
 
+          {/* Mobile Burger */}
           <button
-            onClick={() => setOpen((v) => !v)}
+            type="button"
+            onClick={() => setOpen(v => !v)}
+            className="md:hidden rounded-2xl border border-zinc-800 bg-zinc-950/40 px-3 py-2 text-sm font-semibold text-zinc-200 hover:border-orange-500/40"
             aria-label="Menu"
-            className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-zinc-100"
+            aria-expanded={open}
           >
             {open ? "✕" : "☰"}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      {open && (
-        <div className="md:hidden border-t border-white/10 bg-black/60 backdrop-blur">
-          <div className="mx-auto max-w-7xl px-4 py-4 flex flex-col gap-2 text-sm">
-            {navLinks.map((l) => (
+      {/* Mobile Menu Dropdown */}
+      {open ? (
+        <div className="md:hidden">
+          <div className="glass-strong mx-auto mt-3 max-w-6xl rounded-2xl p-3">
+            <div className="grid gap-2">
               <Link
-                key={l.href}
-                href={withLocale(locale, l.href)}
-                onClick={() => setOpen(false)}
-                className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-zinc-200 hover:bg-white/10"
+                className="rounded-xl border border-zinc-800 bg-zinc-950/40 px-4 py-3 text-sm text-zinc-200 hover:border-orange-500/40"
+                href="./glossary"
               >
-                {l.label}
+                {t("glossary")}
               </Link>
-            ))}
+              <Link
+                className="rounded-xl border border-zinc-800 bg-zinc-950/40 px-4 py-3 text-sm text-zinc-200 hover:border-orange-500/40"
+                href="./quiz"
+              >
+                {t("quiz")}
+              </Link>
 
-            {/* Telegram auch im Menü, zusätzlich */}
-            <a
-              href={TELEGRAM_URL}
-              target="_blank"
-              rel="noreferrer"
-              onClick={() => setOpen(false)}
-              className="rounded-xl border border-orange-500/30 bg-orange-500/10 px-4 py-3 text-orange-200"
-            >
-              Telegram öffnen
-            </a>
+              <a
+                className="rounded-xl border border-orange-500/30 bg-orange-500/10 px-4 py-3 text-sm text-orange-200 hover:bg-orange-500/15"
+                href="https://t.me/MindsetCashflowNetworkmarketing"
+                target="_blank"
+                rel="noreferrer"
+              >
+                {t("telegram")}
+              </a>
+
+              <div className="mt-2 grid gap-2 pt-2 border-t border-zinc-800/70">
+                <Link
+                  className="rounded-xl border border-zinc-800 bg-zinc-950/40 px-4 py-3 text-sm text-zinc-200 hover:border-orange-500/40"
+                  href="./disclaimer"
+                >
+                  {t("disclaimer")}
+                </Link>
+                <Link
+                  className="rounded-xl border border-zinc-800 bg-zinc-950/40 px-4 py-3 text-sm text-zinc-200 hover:border-orange-500/40"
+                  href="./datenschutz"
+                >
+                  {t("privacy")}
+                </Link>
+                <Link
+                  className="rounded-xl border border-zinc-800 bg-zinc-950/40 px-4 py-3 text-sm text-zinc-200 hover:border-orange-500/40"
+                  href="./impressum"
+                >
+                  {t("imprint")}
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
-      )}
+      ) : null}
     </header>
   );
 }
