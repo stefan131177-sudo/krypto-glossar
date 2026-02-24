@@ -1,0 +1,107 @@
+{
+  "nav": {
+    "glossary": "Glossary",
+    "quiz": "Quiz",
+    "telegram": "Telegram",
+    "disclaimer": "Disclaimer",
+    "privacy": "Privacy",
+    "imprint": "Imprint",
+    "joinTelegram": "Join Telegram"
+  },
+
+  "home": {
+    "title": "Crypto Glossary",
+    "subtitle": "Learn the most important crypto terms – compact, clear & security-first.",
+    "ctaGlossary": "Open Glossary",
+    "ctaQuiz": "Start Quiz"
+  },
+
+  "glossary": {
+    "title": "Glossary",
+    "search": "Search…",
+    "filter": "Category",
+    "all": "All"
+  },
+
+  "quiz": {
+    "title": "Quiz",
+    "subtitle": "Test yourself – and learn directly from the explanations.",
+    "start": "Start",
+    "next": "Next",
+    "restart": "Restart",
+    "reveal": "Solution",
+    "revealButton": "Show solution",
+    "startHint": "{count} random questions from the glossary — freshly shuffled every time.",
+    "resultTitle": "Result",
+    "resultText": "You answered {score} out of {total} correctly.",
+    "scoreLabel": "Score",
+    "promptTitle": "What does this describe?",
+    "notEnoughTitle": "Quiz",
+    "notEnoughText": "Not enough terms to start a quiz (min. 4).",
+    "correctBadge": "correct",
+    "wrongBadge": "wrong"
+  },
+
+  "imprint": {
+    "title": "Imprint",
+    "legal": "Information according to § 5 DDG",
+    "country": "Germany",
+    "contact": {
+      "title": "Contact",
+      "phone": "Phone",
+      "email": "Email"
+    },
+    "responsible": {
+      "title": "Responsible for content according to § 18 (2) MStV"
+    },
+    "content": {
+      "title": "Liability for content",
+      "text": "The contents of our pages were created with great care. However, we cannot guarantee the accuracy, completeness or timeliness of the content."
+    },
+    "links": {
+      "title": "Liability for links",
+      "text": "Our website contains links to external third-party websites over whose content we have no influence."
+    },
+    "copyright": {
+      "title": "Copyright",
+      "text": "The content and works created by the site operator on these pages are subject to German copyright law."
+    }
+  },
+
+  "privacy": {
+    "title": "Privacy Policy",
+    "responsible": {
+      "title": "Responsible entity"
+    },
+    "contact": "Contact",
+    "data": {
+      "title": "Collection and storage of personal data",
+      "text": "No personal data is actively collected when visiting this website. Server log files are stored for technical reasons."
+    },
+    "cookies": {
+      "title": "Cookies / Tracking",
+      "text": "This website does not use tracking or analytics cookies. Only technically necessary cookies (e.g. language settings) are used."
+    },
+    "external": {
+      "title": "External services",
+      "text": "This website uses external services (e.g. hosting via Vercel). The privacy policies of the respective providers apply."
+    },
+    "hosting": {
+      "title": "Hosting",
+      "provider": "Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, USA",
+      "privacy": "https://vercel.com/legal/privacy-policy"
+    },
+    "rights": {
+      "title": "Your rights",
+      "text": "You have the right to access, rectification, deletion, restriction of processing and data portability. You may also object to processing."
+    }
+  },
+
+  "disclaimer": {
+    "title": "Disclaimer",
+    "info": "The content of this project is for informational and educational purposes only.",
+    "risk": "Cryptocurrencies involve high risk. There is a risk of total loss.",
+    "liability": "No liability is assumed for damages arising from the use of this content.",
+    "usage": "All information provided without guarantee. No financial advice."
+  }
+}

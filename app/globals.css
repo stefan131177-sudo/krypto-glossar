@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+:root { color-scheme: dark; }
+html, body { height: 100%; }
+
+body {
+  background:
+    radial-gradient(1000px 600px at 10% 0%, rgba(247,147,26,.22), transparent 60%),
+    radial-gradient(900px 500px at 90% 10%, rgba(234,179,8,.14), transparent 55%),
+    radial-gradient(900px 600px at 50% 110%, rgba(59,130,246,.12), transparent 60%),
+    linear-gradient(180deg, rgba(9,9,11,1) 0%, rgba(9,9,11,1) 65%, rgba(3,7,18,1) 100%);
+  background-color: #09090b;
+  color: rgb(244 244 245);
+}
+
+::selection { background: rgba(247,147,26,.35); }
+
+/* Mini utility classes ohne @apply (Tailwind v4 safe) */
+.glass {
+  border: 1px solid rgba(39,39,42,.8);
+  background: rgba(9,9,11,.55);
+  backdrop-filter: blur(18px);
+}
+
+.glass-strong {
+  border: 1px solid rgba(39,39,42,.85);
+  background: rgba(9,9,11,.75);
+  backdrop-filter: blur(18px);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(63,63,70,.7);
+  background: rgba(9,9,11,.6);
+  padding: .25rem .75rem;
+  font-size: .75rem;
+  color: rgb(228 228 231);
+}
