@@ -12,6 +12,29 @@ function stripLocale(pathname: string) {
   return pathname.replace(/^\/(de|en)(?=\/|$)/, "") || "/";
 }
 
+function LogoBadge({ size = 36 }: { size?: number }) {
+  // Kreis + zentriertes Logo + dezenter Glow on hover (wie vorher)
+  // size = outer circle size; inner logo slightly smaller
+  const inner = Math.max(18, Math.round(size * 0.78));
+
+  return (
+    <div
+      className="group relative flex items-center justify-center rounded-full bg-black/35 ring-1 ring-orange-500/35 transition
+                 hover:shadow-[0_0_14px_rgba(255,140,0,0.55)]"
+      style={{ width: size, height: size }}
+    >
+      <Image
+        src="/mcn-logo.png"
+        alt="MCN"
+        width={inner}
+        height={inner}
+        priority
+        className="object-contain"
+      />
+    </div>
+  );
+}
+
 export default function Header() {
   const t = useTranslations("nav");
   const locale = useLocale() as Locale;
@@ -35,16 +58,11 @@ export default function Header() {
                 className="flex items-center gap-2 min-w-0"
                 onClick={() => setOpen(false)}
               >
-                <Image
-                  src="/mcn-logo.png"
-                  alt="MCN"
-                  width={36}
-                  height={36}
-                  priority
-                  className="rounded-full ring-1 ring-orange-500/30"
-                />
+                <LogoBadge size={36} />
                 <div className="min-w-0 leading-tight">
-                  <div className="text-[11px] text-zinc-400">Mindset Cashflow</div>
+                  <div className="text-[11px] text-zinc-400">
+                    Mindset Cashflow
+                  </div>
                   <div className="truncate text-base font-semibold text-zinc-100">
                     Krypto Glossar
                   </div>
@@ -73,7 +91,11 @@ export default function Header() {
               <div className="shrink-0 flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-2 text-xs">
                 <Link
                   href={linkFor("de")}
-                  className={locale === "de" ? "text-white" : "text-zinc-400 hover:text-zinc-200"}
+                  className={
+                    locale === "de"
+                      ? "text-white"
+                      : "text-zinc-400 hover:text-zinc-200"
+                  }
                   onClick={() => setOpen(false)}
                 >
                   DE
@@ -81,7 +103,11 @@ export default function Header() {
                 <span className="mx-2 text-zinc-600">|</span>
                 <Link
                   href={linkFor("en")}
-                  className={locale === "en" ? "text-white" : "text-zinc-400 hover:text-zinc-200"}
+                  className={
+                    locale === "en"
+                      ? "text-white"
+                      : "text-zinc-400 hover:text-zinc-200"
+                  }
                   onClick={() => setOpen(false)}
                 >
                   EN
@@ -97,17 +123,12 @@ export default function Header() {
               className="flex items-center gap-3 min-w-0"
               onClick={() => setOpen(false)}
             >
-              <Image
-                src="/mcn-logo.png"
-                alt="MCN"
-                width={38}
-                height={38}
-                priority
-                className="rounded-full ring-1 ring-orange-500/30"
-              />
+              <LogoBadge size={38} />
               <div className="min-w-0 leading-tight">
                 <div className="text-xs text-zinc-400">Mindset Cashflow</div>
-                <div className="truncate text-lg font-semibold text-zinc-100">Krypto Glossar</div>
+                <div className="truncate text-lg font-semibold text-zinc-100">
+                  Krypto Glossar
+                </div>
               </div>
             </Link>
 
@@ -123,14 +144,24 @@ export default function Header() {
               <div className="flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-2 text-sm">
                 <Link
                   href={linkFor("de")}
-                  className={locale === "de" ? "text-white" : "text-zinc-400 hover:text-zinc-200"}
+                  className={
+                    locale === "de"
+                      ? "text-white"
+                      : "text-zinc-400 hover:text-zinc-200"
+                  }
+                  onClick={() => setOpen(false)}
                 >
                   DE
                 </Link>
                 <span className="mx-3 text-zinc-600">|</span>
                 <Link
                   href={linkFor("en")}
-                  className={locale === "en" ? "text-white" : "text-zinc-400 hover:text-zinc-200"}
+                  className={
+                    locale === "en"
+                      ? "text-white"
+                      : "text-zinc-400 hover:text-zinc-200"
+                  }
+                  onClick={() => setOpen(false)}
                 >
                   EN
                 </Link>
