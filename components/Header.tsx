@@ -30,15 +30,16 @@ export default function Header() {
           <div className="sm:hidden">
             <div className="flex items-center justify-between gap-2">
               <Link href={`/${locale}`} className="flex items-center gap-3 min-w-0">
-                <div className="relative flex h-15 w-15 items-center justify-center rounded-full ring-1 ring-orange-500/40 transition hover:shadow-[0_0_12px_rgba(249,115,22,0.6)]">
-                  <Image
-                    src="/mcn-logo.png"
-                    alt="MCN"
-                    fill
-                    className="object-contain p-1"
-                    priority
-                  />
-                </div>
+              <div className="relative flex h-15 w-15 items-center justify-center rounded-full bg-black/40 ring-1 ring-orange-500/40 
+                transition hover:shadow-[0_0_14px_rgba(249,115,22,0.6)]">
+  <Image
+    src="/mcn-logo.png"
+    alt="MCN"
+    fill
+    priority
+    className="object-contain p-1"
+  />
+</div>
                 <div className="min-w-0 leading-tight">
                   <div className="text-[11px] text-zinc-400">Mindset Cashflow</div>
                   <div className="truncate text-base font-semibold text-zinc-100">
@@ -79,15 +80,16 @@ export default function Header() {
           {/* DESKTOP */}
           <div className="hidden sm:flex h-14 items-center justify-between gap-3">
             <Link href={`/${locale}`} className="flex items-center gap-3 min-w-0">
-              <div className="relative flex h-15 w-15 items-center justify-center rounded-full ring-1 ring-orange-500/40 transition hover:shadow-[0_0_14px_rgba(249,115,22,0.6)]">
-                <Image
-                  src="/mcn-logo.png"
-                  alt="MCN"
-                  fill
-                  className="object-contain p-1"
-                  priority
-                />
-              </div>
+            <div className="relative flex h-15 w-15 items-center justify-center rounded-full bg-black/40 ring-1 ring-orange-500/40 
+                transition hover:shadow-[0_0_14px_rgba(249,115,22,0.6)]">
+  <Image
+    src="/mcn-logo.png"
+    alt="MCN"
+    fill
+    priority
+    className="object-contain p-1"
+  />
+</div>
               <div className="min-w-0 leading-tight">
                 <div className="text-xs text-zinc-400">Mindset Cashflow</div>
                 <div className="truncate text-lg font-semibold text-zinc-100">Krypto Glossar</div>
