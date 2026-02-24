@@ -14,8 +14,8 @@ function stripLocale(pathname: string) {
 
 /**
  * Wenn dein PNG innen minimal “versetzt” ist, kannst du hier feinjustieren:
- * z.B. LOGO_NUDGE_X = "translate-x-[1px]" oder "-translate-x-[1px]"
- *      LOGO_NUDGE_Y = "translate-y-[1px]" oder "-translate-y-[1px]"
+ * z.B. LOGO_NUDGE_X = "translate-x-[2px]" oder "-translate-x-[1px]"
+ *      LOGO_NUDGE_Y = "translate-y-[0px]" oder "-translate-y-[1px]"
  */
 const LOGO_NUDGE_X = "translate-x-[1px]";
 const LOGO_NUDGE_Y = "translate-y-[1px]";
