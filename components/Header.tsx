@@ -3,117 +3,164 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
+import { useMemo, useState } from "react";
+
+type Locale = "de" | "en";
+
+function stripLocale(pathname: string) {
+  return pathname.replace(/^\/(de|en)(?=\/|$)/, "") || "/";
+}
 
 export default function Header() {
   const t = useTranslations("nav");
-  const locale = useLocale();
+  const locale = useLocale() as Locale;
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
-  const basePath = pathname.replace(/^\/(de|en)/, "");
+  const basePath = useMemo(() => stripLocale(pathname), [pathname]);
+
+  const linkFor = (targetLocale: Locale) =>
+    `/${targetLocale}${basePath === "/" ? "" : basePath}`;
 
   return (
     <header className="sticky top-3 z-50 px-3">
-      <div className="glass-strong mx-auto flex h-12 max-w-6xl items-center justify-between rounded-2xl px-4">
-        {/* Left: Logo + Brand */}
-        <Link href={`/${locale}`} className="flex items-center gap-3 min-w-0">
-          <Image
-            src="/mcn-logo.png"
-            alt="Mindset Cashflow Networkmarketing"
-            width={36}
-            height={36}
-            className="rounded-full ring-1 ring-orange-500/30 shadow-lg shadow-orange-500/20"
-            priority
-          />
-          <div className="leading-tight min-w-0">
-            <div className="hidden sm:block text-xs text-zinc-400">
-              Mindset Cashflow
-            </div>
-            <div className="truncate text-sm font-semibold tracking-tight sm:text-lg">
-              Krypto Glossar
-            </div>
-          </div>
-        </Link>
-
-        {/* Right: Desktop */}
-        <nav className="hidden items-center gap-2 sm:flex">
+      <div className="mx-auto max-w-6xl">
+        <div className="glass-strong flex h-14 items-center justify-between rounded-2xl px-4">
+          {/* LEFT: Logo + Brand */}
           <Link
-            href="https://t.me/MindsetCashflowNetworkmarketing"
-            target="_blank"
-            className="rounded-full border border-orange-500/40 px-3 py-1 text-sm font-medium text-orange-400 hover:bg-orange-500/10"
+            href={`/${locale}`}
+            className="flex items-center gap-3 min-w-0"
+            onClick={() => setOpen(false)}
           >
-            Telegram
+            <Image
+              src="/mcn-logo.png"
+              alt="MCN"
+              width={38}
+              height={38}
+              priority
+              className="rounded-full ring-1 ring-orange-500/30"
+            />
+            <div className="min-w-0 leading-tight">
+              <div className="text-xs text-zinc-400">Mindset Cashflow</div>
+              <div className="truncate text-lg font-semibold">Krypto Glossar</div>
+            </div>
           </Link>
 
-          <div className="flex items-center gap-2 rounded-full border border-white/10 px-3 py-1 text-sm">
+          {/* RIGHT: Controls (like your screenshot) */}
+          <div className="flex items-center gap-2">
+            {/* Telegram */}
             <Link
-              href={`/${locale === "de" ? "en" : "de"}${basePath}`}
-              className="text-zinc-300 hover:text-white"
+              href="https://t.me/MindsetCashflowNetworkmarketing"
+              target="_blank"
+              className="rounded-full border border-orange-500/40 bg-orange-500/10 px-4 py-2 text-sm font-medium text-orange-300 hover:bg-orange-500/15"
             >
-              {locale === "de" ? "EN" : "DE"}
+              {t("telegram")}
             </Link>
+
+            {/* Language pill: DE | EN (both visible) */}
+            <div className="hidden sm:flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-2 text-sm">
+              <Link
+                href={linkFor("de")}
+                className={locale === "de" ? "text-white" : "text-zinc-400 hover:text-zinc-200"}
+              >
+                DE
+              </Link>
+              <span className="mx-3 text-zinc-600">|</span>
+              <Link
+                href={linkFor("en")}
+                className={locale === "en" ? "text-white" : "text-zinc-400 hover:text-zinc-200"}
+              >
+                EN
+              </Link>
+            </div>
+
+            {/* Mobile Language pill (compact, still both visible) */}
+            <div className="sm:hidden flex items-center rounded-full border border-white/10 bg-white/5 px-2 py-2 text-xs">
+              <Link
+                href={linkFor("de")}
+                className={locale === "de" ? "text-white" : "text-zinc-400"}
+              >
+                DE
+              </Link>
+              <span className="mx-2 text-zinc-600">|</span>
+              <Link
+                href={linkFor("en")}
+                className={locale === "en" ? "text-white" : "text-zinc-400"}
+              >
+                EN
+              </Link>
+            </div>
+
+            {/* Menu */}
+            <button
+              onClick={() => setOpen((v) => !v)}
+              className="rounded-full border border-white/10 bg-white/5 px-3 py-2 text-sm hover:bg-white/10"
+              aria-label="Menu"
+            >
+              ☰
+            </button>
           </div>
-
-          <button
-            onClick={() => setOpen(!open)}
-            className="rounded-full border border-white/10 px-3 py-1 text-sm hover:bg-white/5"
-            aria-label="Menu"
-          >
-            ☰
-          </button>
-        </nav>
-
-        {/* Right: Mobile */}
-        <div className="flex items-center gap-2 sm:hidden">
-          <Link
-            href="https://t.me/MindsetCashflowNetworkmarketing"
-            target="_blank"
-            className="rounded-full border border-orange-500/40 px-3 py-1 text-xs font-medium text-orange-400"
-          >
-            Telegram
-          </Link>
-
-          <Link
-            href={`/${locale === "de" ? "en" : "de"}${basePath}`}
-            className="rounded-full border border-white/10 px-3 py-1 text-xs"
-          >
-            {locale === "de" ? "EN" : "DE"}
-          </Link>
-
-          <button
-            onClick={() => setOpen(!open)}
-            className="rounded-full border border-white/10 px-3 py-1 text-sm"
-            aria-label="Menu"
-          >
-            ☰
-          </button>
         </div>
+
+        {/* Dropdown Menu (mobile + desktop) */}
+        {open && (
+          <div className="glass-strong mt-2 rounded-2xl p-4">
+            <nav className="grid gap-2 text-sm">
+              <Link
+                href={`/${locale}/glossary`}
+                className="rounded-xl px-3 py-2 hover:bg-white/5"
+                onClick={() => setOpen(false)}
+              >
+                {t("glossary")}
+              </Link>
+
+              <Link
+                href={`/${locale}/quiz`}
+                className="rounded-xl px-3 py-2 hover:bg-white/5"
+                onClick={() => setOpen(false)}
+              >
+                {t("quiz")}
+              </Link>
+
+              {/* These were missing for you on mobile */}
+              <Link
+                href={`/${locale}/disclaimer`}
+                className="rounded-xl px-3 py-2 hover:bg-white/5"
+                onClick={() => setOpen(false)}
+              >
+                {t("disclaimer")}
+              </Link>
+
+              <Link
+                href={`/${locale}/datenschutz`}
+                className="rounded-xl px-3 py-2 hover:bg-white/5"
+                onClick={() => setOpen(false)}
+              >
+                {t("privacy")}
+              </Link>
+
+              <Link
+                href={`/${locale}/impressum`}
+                className="rounded-xl px-3 py-2 hover:bg-white/5"
+                onClick={() => setOpen(false)}
+              >
+                {t("imprint")}
+              </Link>
+
+              {/* Optional: Telegram duplicate inside menu */}
+              <Link
+                href="https://t.me/MindsetCashflowNetworkmarketing"
+                target="_blank"
+                className="mt-1 rounded-xl border border-orange-500/30 bg-orange-500/10 px-3 py-2 text-orange-300 hover:bg-orange-500/15"
+                onClick={() => setOpen(false)}
+              >
+                {t("joinTelegram")}
+              </Link>
+            </nav>
+          </div>
+        )}
       </div>
-
-      {/* Mobile Menu */}
-      {open && (
-        <div className="glass-strong mx-auto mt-2 max-w-6xl rounded-2xl p-4 sm:hidden">
-          <nav className="flex flex-col gap-3 text-sm">
-            <Link href={`/${locale}/glossary`} onClick={() => setOpen(false)}>
-              {t("glossary")}
-            </Link>
-            <Link href={`/${locale}/quiz`} onClick={() => setOpen(false)}>
-              {t("quiz")}
-            </Link>
-            <Link href={`/${locale}/disclaimer`} onClick={() => setOpen(false)}>
-              {t("disclaimer")}
-            </Link>
-            <Link href={`/${locale}/datenschutz`} onClick={() => setOpen(false)}>
-              {t("privacy")}
-            </Link>
-            <Link href={`/${locale}/impressum`} onClick={() => setOpen(false)}>
-              {t("imprint")}
-            </Link>
-          </nav>
-        </div>
-      )}
     </header>
   );
 }
