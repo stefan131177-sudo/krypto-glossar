@@ -90,7 +90,7 @@ export default function Header() {
 
             <div className="mt-2 flex items-center justify-between gap-2">
               <Link
-                href="https://t.me/MindsetCashflowNetworkmarketing"
+                href="https://t.me/+QE5yDSLZSZ8xMjcy"
                 target="_blank"
                 className="flex-1 rounded-full border border-orange-500/40 bg-orange-500/10 px-4 py-2 text-center text-sm font-medium text-orange-300 hover:bg-orange-500/15"
                 onClick={() => setOpen(false)}
@@ -135,7 +135,7 @@ export default function Header() {
 
             <div className="flex items-center gap-2">
               <Link
-                href="https://t.me/MindsetCashflowNetworkmarketing"
+                href="https://t.me/+QE5yDSLZSZ8xMjcy"
                 target="_blank"
                 className="rounded-full border border-orange-500/40 bg-orange-500/10 px-4 py-2 text-sm font-medium text-orange-300 hover:bg-orange-500/15"
               >

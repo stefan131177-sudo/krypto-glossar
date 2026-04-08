@@ -24,7 +24,7 @@ export default async function LocaleLayout({
             <footer className="border-t border-zinc-800 py-6 text-sm text-zinc-400">
               <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                 <a
-                  href="https://t.me/MindsetCashflowNetworkmarketing"
+                  href="https://t.me/+QE5yDSLZSZ8xMjcy"
                   className="text-zinc-200 hover:text-orange-400"
                   target="_blank"
                   rel="noreferrer"
